@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoMath LLM Hyperparameters</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          packages: { "[+]": ["html"] },
+          inlineMath: [["\\(", "\\)"]],
+        },
+        loader: { load: ["[tex]/html"] },
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="controls">
+        <label for="topK"
+          >Top-K: Discards all but the
+          <span id="top-k" class="dynamic">50</span> most probable tokens</label
+        >
+        <input type="range" id="topK" min="10" max="100" value="50" />
+
+        <label for="topP"
+          >Top-P: Selects tokens with cumulative probability ≤
+          <span id="top-p" class="dynamic">1.0</span> <br />Selected Sum:
+          <span id="top-p-sum" class="dynamic">100%</span></label
+        >
+        <input
+          type="range"
+          id="topP"
+          min="0.01"
+          max="1"
+          value="1"
+          step="0.01"
+        />
+
+        <label for="temp"
+          >Temperature:
+          <span id="temp-val"
+            >\( P(w_i) = \class{math}{\frac{e^{logit_i /
+            \class{dynamic}{0.50}}}{\sum_{k=1}^{n} e^{logit_k /
+            \class{dynamic}{0.50}}}} \)</span
+          >
+        </label>
+        <input
+          type="range"
+          id="temp"
+          min="0.01"
+          max="2"
+          step="0.01"
+          value="0.5"
+        />
+      </div>
+      <div id="chart"></div>
+    </div>
+
+    <script src="words.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
